@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
+import org.parceler.Parcels;
 import org.w3c.dom.Text;
 
 import java.util.List;
@@ -73,7 +74,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
     // Bind values based on the position of the element
 
     // Define a viewholder
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener{
 
         ImageView ivProfileImage;
         TextView tvBody;
@@ -92,6 +93,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             createdAt = itemView.findViewById(R.id.tvCreatedAt);
             btnReply = itemView.findViewById(R.id.btnReply);
             ivMedia = itemView.findViewById(R.id.ivMedia);
+            itemView.setOnClickListener(this);
 
         }
 
@@ -106,7 +108,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                 public void onClick(View view) {
                     Intent i = new Intent(context, ComposeActivity.class);
                     //Intent intent = new Intent(this, ComposeActivity.class);
-                    i.putExtra("Author", tweet.user.screenName);
+                    i.putExtra("Author", "@" + tweet.user.screenName);
                     i.putExtra("Reply", true);
                     startActivity(context, i,null);
                 }
@@ -119,6 +121,26 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                 ivMedia.setVisibility(View.GONE);
             }
             Glide.with(context).load(tweet.user.profileImageUrl).into(ivProfileImage);
+
+        }
+
+
+        @Override
+        public void onClick(View view) {
+                int position = getAdapterPosition();
+
+                if (position != RecyclerView.NO_POSITION) {
+                    // get the tweet at the position
+                    Tweet tweet = tweets.get(position);
+
+                    // Intent to display MovieDetailsActivity
+                    Intent intent = new Intent(context, DetailActivity.class);
+
+                    intent.putExtra(Tweet.class.getSimpleName(), Parcels.wrap(tweet));
+
+                    context.startActivity(intent);
+
+                }
 
         }
     }

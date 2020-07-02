@@ -1,8 +1,11 @@
 package com.codepath.apps.restclienttemplate;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -42,6 +45,10 @@ public class ComposeActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_compose);
 
+        ActionBar bar = getSupportActionBar();
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#4d1da1f2")));
+        bar.setTitle("Compose Tweet");
+
         client = TwitterApp.getRestClient(this);
 
         reply = this.getIntent().getBooleanExtra("Reply",false);
@@ -50,7 +57,7 @@ public class ComposeActivity extends AppCompatActivity {
 
         if (reply){
             author = getIntent().getStringExtra("Author");
-            etCompose.setText("@" + author);
+            etCompose.setText(author);
 
         }
         tvCcount = findViewById(R.id.tvCharacterCount);

@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -83,6 +84,8 @@ public class TimelineActivity extends AppCompatActivity {
         rvTweets.setLayoutManager(layoutManager);
         rvTweets.setAdapter(adapter);
         // Retain an instance so that you can call 'resetState()' for fresh searches
+
+
         scrollListener = new EndlessRecyclerViewScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
@@ -221,6 +224,7 @@ public class TimelineActivity extends AppCompatActivity {
                 Log.i(TAG, "onSuccess!" + json.toString());
                 JSONArray jsonArray = json.jsonArray;
                 try {
+                    // Import tweets from network
                     final List<Tweet> tweetsFromNetwork = Tweet.fromJsonArray(jsonArray);
                     tweets.addAll(Tweet.fromJsonArray(jsonArray));
                     adapter.clear();

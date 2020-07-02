@@ -1,9 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DetailActivity">
+    <ImageView
+        android:id="@+id/ivDetailProfileImage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        tools:layout_alignParentStart="true"
+        tools:layout_marginStart="0dp"
+        tools:srcCompat="@tools:sample/avatars" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tvDetailName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@id/ivDetailProfileImage"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvDetailBody"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivDetailProfileImage"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        android:autoLink="all"
+        android:linksClickable="true"
+        android:text="This is my tweet!!"/>
+
+    <TextView
+        android:id="@+id/tvScreenName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="0dp"
+        android:layout_below="@id/tvDetailName"
+        android:layout_toEndOf="@id/ivDetailProfileImage"
+        android:text="TextView" />
+
+    <ImageView
+        android:id="@+id/ivDetailMedia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvDetailBody"
+        android:layout_marginTop="11dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tvDetailCreatedAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivDetailMedia"
+        android:text="TextView" />
+
+    <ImageButton
+        android:id="@+id/detailBtnReply"
+        android:layout_width="68dp"
+        android:layout_height="53dp"
+        android:layout_below="@id/tvDetailCreatedAt"
+        app:srcCompat="@drawable/vector_compose_dm_shortcut" />
+
+    <ImageButton
+        android:id="@+id/detailBtnRetweet"
+        android:layout_below="@id/tvDetailCreatedAt"
+        android:layout_width="68dp"
+        android:layout_height="53dp"
+        android:layout_toEndOf="@id/detailBtnReply"
+        android:src="@drawable/ic_vector_retweet" />
+</RelativeLayout>
