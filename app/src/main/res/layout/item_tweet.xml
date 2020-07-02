@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <ImageView
@@ -17,7 +17,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/tvScreenName"
+        android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -29,12 +29,48 @@
         android:id="@+id/tvBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tvScreenName"
         android:layout_marginStart="5dp"
         android:layout_marginTop="2dp"
         android:layout_toEndOf="@id/ivProfileImage"
-        android:layout_below="@id/tvScreenName"
-        android:text="This is my tweet!!"
+        android:autoLink="all"
         android:linksClickable="true"
-        android:autoLink="all"/>
+        android:text="This is my tweet!!"/>
+
+    <TextView
+    android:id="@+id/tvScreenName"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="5dp"
+    android:layout_marginTop="0dp"
+    android:layout_toEndOf="@id/tvName"
+    android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvCreatedAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@id/tvScreenName"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/btnReply"
+        android:layout_width="42dp"
+        android:layout_height="19dp"
+        android:text="Reply"
+        android:layout_below="@id/tvBody"/>
+
+    <ImageView
+        android:id="@+id/ivMedia"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:layout_below="@id/tvBody"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="7dp"
+        android:layout_toEndOf="@id/btnReply" />
+
 
 </RelativeLayout>

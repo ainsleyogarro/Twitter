@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+
 
     <item
         android:id="@+id/compose"
         android:icon="@android:drawable/ic_menu_edit"
-        android:title="Compose" />
+        android:title="Compose"
+        />
+
+    <item
+        android:id="@+id/miActionProgress"
+        android:title="Loading"
+        android:visible="false"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:actionLayout="@layout/activity_view_progress"/>
 </menu>

@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
@@ -21,21 +24,58 @@ import okhttp3.Headers;
 public class ComposeActivity extends AppCompatActivity {
 
     public static final String TAG = "ComposeActivity";
-    public static final int MAX_TWEET_LENGTH = 140;
+    public static final int MAX_TWEET_LENGTH = 280;
 
     EditText etCompose;
     Button btnTweet;
-
+    TextView tvCcount;
     TwitterClient client;
+
+    // Used for Replies
+    String author = "";
+    boolean reply;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_compose);
 
         client = TwitterApp.getRestClient(this);
 
+        reply = this.getIntent().getBooleanExtra("Reply",false);
+
         etCompose = findViewById(R.id.etCompose);
+
+        if (reply){
+            author = getIntent().getStringExtra("Author");
+            etCompose.setText("@" + author);
+
+        }
+        tvCcount = findViewById(R.id.tvCharacterCount);
+        tvCcount.setText(String.valueOf(MAX_TWEET_LENGTH));
+
+        // Used to show user how many characters user has left
+        TextWatcher characterCounter = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                tvCcount.setText(String.valueOf(MAX_TWEET_LENGTH - etCompose.getText().length()
+                ));
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+
+        };
+        etCompose.addTextChangedListener(characterCounter);
         btnTweet = findViewById(R.id.btnTweet);
 
         // Set click listener on button
@@ -48,10 +88,10 @@ public class ComposeActivity extends AppCompatActivity {
                     return;
                 }
                 if (tweetContent.length() > MAX_TWEET_LENGTH){
-                    Toast.makeText(ComposeActivity.this, "Sorry, your is too long", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ComposeActivity.this, "Sorry, your tweet is too long", Toast.LENGTH_LONG).show();
                     return;
                 }
-                Toast.makeText(ComposeActivity.this, tweetContent, Toast.LENGTH_LONG).show();
+                //Toast.makeText(ComposeActivity.this, tweetContent, Toast.LENGTH_LONG).show();
                 // Make an API call to Twitter to publish the tweet
                 client.publishTweet(tweetContent, new JsonHttpResponseHandler() {
                     @Override
@@ -79,5 +119,6 @@ public class ComposeActivity extends AppCompatActivity {
                 });
             }
         });
+
     }
 }

@@ -29,4 +29,13 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"/>
+
+    <TextView
+        android:id="@+id/tvCharacterCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etCompose"
+        android:layout_toStartOf="@id/btnTweet"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"/>
 </RelativeLayout>
