@@ -1,11 +1,12 @@
 package com.codepath.apps.restclienttemplate;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.app.ActionBar;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -52,7 +53,9 @@ public class TimelineActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-       getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ff1da1f2")));
+        ActionBar bar = getSupportActionBar();
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ff1da1f2")));
+        bar.setTitle("Twitter");
         //bar.setBackgroundDrawable( new ColorDrawable(Color.parseColor("#ff1da1f2")));
         setContentView(R.layout.activity_timeline);
 
@@ -202,7 +205,7 @@ public class TimelineActivity extends AppCompatActivity {
                     adapter.clear();
                     // ... the data has come back, add new items to your adapter..
                     adapter.addAll(Tweet.fromJsonArray(json.jsonArray));
-                    // Now we call setRefreshing(false) to signal reffresh has finished
+                    // Now we call setRefreshing(false) to signal refresh has finished
                     swipeContainer.setRefreshing(false);
 
                 } catch (JSONException e) {
@@ -216,6 +219,16 @@ public class TimelineActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // insert users first
+
+    }
+
+
+
 
     private void populateHomeTimeline() {
         client.getHomeTimeline(new JsonHttpResponseHandler() {

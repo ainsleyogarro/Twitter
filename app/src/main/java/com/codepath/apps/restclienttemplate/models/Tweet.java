@@ -50,6 +50,9 @@ public class Tweet {
     @ColumnInfo
     public  String mediaIdUrl;
 
+    @Ignore
+    public Boolean favorite;
+
     public Tweet(){}
 
     public static Tweet fromJson(JSONObject jsonObject) throws JSONException {
@@ -68,6 +71,7 @@ public class Tweet {
             tweet.mediaIdUrl = "";
 
         }
+        tweet.favorite = jsonObject.getBoolean("favorited");
         //tweet.mediaIdUrl = jsonObject.getJSONArray("extended_entities").getJSONObject(0).getString
        //jsonObject.getJSONObject("retweeted_status").getJSONObject("quoted_status").getJSONObject("extended_entities").getJSONArray("media")
          //       .getJSONObject(0).getString("media_url");

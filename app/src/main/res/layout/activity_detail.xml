@@ -74,4 +74,12 @@
         android:layout_height="53dp"
         android:layout_toEndOf="@id/detailBtnReply"
         android:src="@drawable/ic_vector_retweet" />
+
+    <ImageButton
+        android:layout_width="68dp"
+        android:layout_height="53dp"
+        android:layout_toEndOf="@id/detailBtnRetweet"
+        android:layout_below="@id/tvDetailCreatedAt"
+        android:id="@+id/detailBtnFavorite"
+        />
 </RelativeLayout>

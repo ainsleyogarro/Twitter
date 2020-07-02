@@ -30,7 +30,11 @@ public class User {
 
     @ColumnInfo
     public String name;
+
+    @ColumnInfo
     public String screenName;
+
+    @ColumnInfo
     public String profileImageUrl;
 
     public static User fromJson(JSONObject jsonObject) throws JSONException {
