@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.codepath.apps.restclienttemplate.databinding.ActivityDetailBinding;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
@@ -31,7 +32,11 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+
+        // Uses viewbinding to reduce boilerplate
+        ActivityDetailBinding binding = ActivityDetailBinding.inflate(getLayoutInflater());
+
+        //setContentView(R.layout.activity_detail);
 
         ActionBar bar = getSupportActionBar();
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ff1da1f2")));
@@ -40,12 +45,12 @@ public class DetailActivity extends AppCompatActivity {
 
         // Populate view with all the details from tweet
         tweet = Parcels.unwrap(getIntent().getParcelableExtra("Tweet"));
-        TextView body = findViewById(R.id.tvDetailBody);
-        TextView name = findViewById(R.id.tvDetailName);
-        TextView screenName = findViewById(R.id.tvScreenName);
-        ImageView profilePic = findViewById(R.id.ivDetailProfileImage);
-        ImageView ivMedia = findViewById(R.id.ivDetailMedia);
-        final ImageButton btnFavorite = findViewById(R.id.detailBtnFavorite);
+        TextView body = binding.tvDetailBody;
+        TextView name = binding.tvDetailName;
+        TextView screenName = binding.tvScreenName;
+        ImageView profilePic = binding.ivDetailProfileImage;
+        ImageView ivMedia = binding.ivDetailMedia;
+        final ImageButton btnFavorite = binding.detailBtnFavorite;
 
         if (tweet.favorite){
             btnFavorite.setImageResource(R.drawable.ic_vector_heart);
@@ -102,11 +107,11 @@ public class DetailActivity extends AppCompatActivity {
         else {
             ivMedia.setVisibility(View.GONE);
         }
-        TextView createdAt = findViewById(R.id.tvDetailCreatedAt);
+        TextView createdAt = binding.tvDetailCreatedAt;
         createdAt.setText(tweet.createdAt);
 
         // Reply Button
-        ImageButton reply = findViewById(R.id.detailBtnReply);
+        ImageButton reply = binding.detailBtnReply;
         reply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,7 +124,7 @@ public class DetailActivity extends AppCompatActivity {
         });
 
         // Retweet Button
-        ImageButton retweet = findViewById(R.id.detailBtnRetweet);
+        ImageButton retweet = binding.detailBtnRetweet;
         retweet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

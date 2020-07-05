@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.codepath.apps.restclienttemplate.databinding.ActivityComposeBinding;
+import com.codepath.apps.restclienttemplate.databinding.ActivityDetailBinding;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
@@ -43,7 +45,9 @@ public class ComposeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
-        setContentView(R.layout.activity_compose);
+        ActivityComposeBinding binding = ActivityComposeBinding.inflate(getLayoutInflater());
+        // Reducing boilerplate
+        //setContentView(R.layout.activity_compose);
 
         ActionBar bar = getSupportActionBar();
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#4d1da1f2")));
@@ -53,14 +57,14 @@ public class ComposeActivity extends AppCompatActivity {
 
         reply = this.getIntent().getBooleanExtra("Reply",false);
 
-        etCompose = findViewById(R.id.etCompose);
+        etCompose = binding.etCompose;
 
         if (reply){
             author = getIntent().getStringExtra("Author");
             etCompose.setText(author);
 
         }
-        tvCcount = findViewById(R.id.tvCharacterCount);
+        tvCcount = binding.tvCharacterCount;
         tvCcount.setText(String.valueOf(MAX_TWEET_LENGTH));
 
         // Used to show user how many characters user has left
@@ -83,7 +87,7 @@ public class ComposeActivity extends AppCompatActivity {
 
         };
         etCompose.addTextChangedListener(characterCounter);
-        btnTweet = findViewById(R.id.btnTweet);
+        btnTweet = binding.btnTweet;
 
         // Set click listener on button
         btnTweet.setOnClickListener(new View.OnClickListener() {

@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.codepath.apps.restclienttemplate.databinding.ActivityTimelineBinding;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.apps.restclienttemplate.models.TweetDao;
 import com.codepath.apps.restclienttemplate.models.TweetWithUser;
@@ -51,15 +52,19 @@ public class TimelineActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
+        // Enabling viewBinding
+        ActivityTimelineBinding binding = ActivityTimelineBinding.inflate(getLayoutInflater());
 
         ActionBar bar = getSupportActionBar();
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ff1da1f2")));
         bar.setTitle("Twitter");
-        //bar.setBackgroundDrawable( new ColorDrawable(Color.parseColor("#ff1da1f2")));
-        setContentView(R.layout.activity_timeline);
+       // setContentView(R.layout.activity_timeline);
 
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+
+        swipeContainer = binding.swipeContainer;
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -78,7 +83,7 @@ public class TimelineActivity extends AppCompatActivity {
 
 
         // Find the recycler view
-        rvTweets = findViewById(R.id.rvTweets);
+        rvTweets = binding.rvTweets;
         // Init the list of tweets and adapter
         tweets = new ArrayList<>();
         adapter = new TweetsAdapter(this, tweets);
@@ -141,26 +146,7 @@ public class TimelineActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-/*
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        // Store instance of the menu item containing progress
-        miActionProgressItem = menu.findItem(R.id.miActionProgress);
 
-        // Return to finish
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    public void showProgressBar() {
-        // Show progress item
-        miActionProgressItem.setVisible(true);
-    }
-
-    public void hideProgressBar() {
-        // Hide progress item
-        miActionProgressItem.setVisible(false);
-    }
-    */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.compose){
